@@ -1,20 +1,22 @@
-
+import React, { useState } from 'react';
 import user from '../icons/user.png';
 import passward from '../icons/passward.png';
 import email from '../icons/email.png';
 import "./Loginsignup.css";
 const Signup = () => {
+  const [action, setAction] = useState("Login");
   return (
     <div className="Container">
       <div className="header">
-        <div className="text">Sign Up</div>
+        <div className="text">{action}</div>
         <div className="underline"></div>
       </div>
       <div className="inputs">
-        <div className="input">
+        {action==="Login"?<div></div>:<div className="input">
           <img src={user} alt="" />
           <input type="text" placeholder='Name' />
-        </div>
+        </div>}
+        
         <div className="input">
           <img src={email} alt=""  />
           <input type="email" placeholder="Email" />
@@ -24,10 +26,11 @@ const Signup = () => {
           <input type="password" placeholder='Password' />
         </div>
       </div>
-      <div className='forget-passward'>Forget passward <span>Click Here</span></div>
+      {action==="Sign Up"?<div></div>:<div className='forget-passward'>Forget passward <span>Click Here</span></div>}
+      
       <div className='submit-container'>
-        <div className='submit'>Signup</div>
-        <div className='submit'>Login</div>
+        <div className={action==="Login"?"submit gray":"submit"} onClick={()=> {setAction("Sign Up")}}>Signup</div>
+        <div className={action==="Sign Up"?"submit gray":"submit"} onClick={()=>{setAction("Login")}}>Login</div>
       </div>
     </div>
   )
